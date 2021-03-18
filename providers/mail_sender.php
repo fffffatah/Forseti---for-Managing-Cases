@@ -4,8 +4,8 @@
 <?php
     function sendOtpEmail($username, $address, $otp){
         $email=new \SendGrid\Mail\Mail();
-        $email->setFrom("no-reply@justicecms.com", "Justice - OTP");
-        $email->setSubject("Your Justice Password Reset OTP");
+        $email->setFrom("no-reply@forseti.com", "Forseti - OTP");
+        $email->setSubject("Your Forseti Password Reset OTP");
         $email->addTo($address, $username);
         $email->addContent("text/plain", "OTP for Password Reset: ");
         
@@ -21,7 +21,7 @@
     }
     function sendConfEmail($username, $address, $confLink){
         $email=new \SendGrid\Mail\Mail();
-        $email->setFrom("no-reply@justicecms.com", "Justice - Confirmation");
+        $email->setFrom("no-reply@forseti.com", "Forseti - Confirmation");
         $email->setSubject("Your Justice Confirmation Email");
         $email->addTo($address, $username);
         $email->addContent("text/plain", "Confirmation Email for Account Creation: ");
@@ -38,10 +38,10 @@
     }
     function sendAttachment($id, $username, $address, $filepath, $subject){
         $email=new \SendGrid\Mail\Mail();
-        $email->setFrom("no-reply@justicecms.com", "Justice - Attachments");
+        $email->setFrom("no-reply@forseti.com", "Forseti - Attachments");
         $email->setSubject("Your ".$subject);
         $email->addTo($address, $username);
-        $email->addContent("text/html", "Your Justice ".$subject);
+        $email->addContent("text/html", "Your Forseti ".$subject);
         $file_encoded = base64_encode(file_get_contents($filepath));
         $email->addAttachment($file_encoded, "application/pdf", date("d/m/Y")."RECEIPT.pdf", "attachment");
 

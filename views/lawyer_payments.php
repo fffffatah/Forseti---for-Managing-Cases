@@ -31,8 +31,8 @@
                                             <option value="" selected disabled>Client Name</option>
                                             <?php
                                                 foreach($clients as $client){
-                                                    $client_name=getUserById($client["client_id"]);
-                                                    echo "<option value=\"".$client_name[0]["id"]."\">".$client_name[0]["fullname"]."</option>";
+                                                    $client_name=getUserById($client["CLIENT_ID"]);
+                                                    echo "<option value=\"".$client_name[0]["ID"]."\">".$client_name[0]["FULLNAME"]."</option>";
                                                 }
                                             ?>
                                         </select><span id="err_payer_id" style="color:red;"><?php echo $err_payer_id;?></span>
@@ -67,14 +67,14 @@
                                 foreach($payments as $payment){
                                     echo "<tr>";
                                     echo "<th>".$sr."</th>";
-                                    echo "<td>".$payment["due"]."</td>";
-                                    echo "<td>".$payment["paid"]."</td>";
-                                    echo "<td>".$payment["balance"]."</td>";
-                                    echo "<td>".$payment["due_date"]."</td>";
-                                    echo "<td>".$payment["payment_date"]."</td>";
-                                    echo "<td>".$payment["payer_id"]."</td>";
-                                    echo "<td><a class=\"btn btn-outline-primary\" href=\"lawyer_mail_payment.php?id=".$payment["id"]."\"target=\"_blank\" >Mail Me</a></td>";
-                                    echo "<td><a class=\"btn btn-outline-danger\" href=\"lawyer_delete_payment.php?id=".$payment["id"]."\"target=\"_blank\" >Delete</a></td>";
+                                    echo "<td>".$payment["DUE"]."</td>";
+                                    echo "<td>".$payment["PAID"]."</td>";
+                                    echo "<td>".$payment["BALANCE"]."</td>";
+                                    echo "<td>".$payment["DUE_DATE"]."</td>";
+                                    echo "<td>".$payment["PAYMENT_DATE"]."</td>";
+                                    echo "<td>".$payment["PAYER_ID"]."</td>";
+                                    echo "<td><a class=\"btn btn-outline-primary\" href=\"lawyer_mail_payment.php?id=".$payment["ID"]."\"target=\"_blank\" >Mail Me</a></td>";
+                                    echo "<td><a class=\"btn btn-outline-danger\" href=\"lawyer_delete_payment.php?id=".$payment["ID"]."\"target=\"_blank\" >Delete</a></td>";
                                     echo "</tr>";
                                     $sr++;
                                 }

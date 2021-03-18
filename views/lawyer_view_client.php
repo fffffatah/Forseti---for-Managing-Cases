@@ -14,22 +14,22 @@
         <td align="left" style="padding-top:85px;">
         <div class="card" style="height:600px;width:850px;">
             <div class="card-body">
-                <h5 class="card-title"><?php echo $client[0]["fullname"];?></h5>
-                <h6 class="card-subtitle mb-2 text-muted">Username: <?php echo $client[0]["username"];?></h6>
+                <h5 class="card-title"><?php echo $client[0]["FULLNAME"];?></h5>
+                <h6 class="card-subtitle mb-2 text-muted">Username: <?php echo $client[0]["USERNAME"];?></h6>
                 <p class="card-text">Cases: <br>
                     <?php
                         $sr=1;
                         foreach($cases as $case){
-                            echo $sr.". ".$case["case_title"]."<br>";
+                            echo $sr.". ".$case["CASE_TITLE"]."<br>";
                             $sr++;
                         }
                     ?>
                 </p>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><h6 class="card-subtitle mb-2 text-muted"><b>Client NID: </b><?php echo $client[0]["nid"];?></h6></li>
-                    <li class="list-group-item"><h6 class="card-subtitle mb-2 text-muted"><b>Client Phone: </b><?php echo $client[0]["phone"];?></h6></li>
-                    <li class="list-group-item"><h6 class="card-subtitle mb-2 text-muted"><b>Client Email: </b><?php echo $client[0]["email"];?></h6></li>
-                    <li class="list-group-item"><h6 class="card-subtitle mb-2 text-muted"><b>Client Address: </b><?php echo $client[0]["address"];?></h6></li>
+                    <li class="list-group-item"><h6 class="card-subtitle mb-2 text-muted"><b>Client NID: </b><?php echo $client[0]["NID"];?></h6></li>
+                    <li class="list-group-item"><h6 class="card-subtitle mb-2 text-muted"><b>Client Phone: </b><?php echo $client[0]["PHONE"];?></h6></li>
+                    <li class="list-group-item"><h6 class="card-subtitle mb-2 text-muted"><b>Client Email: </b><?php echo $client[0]["EMAIL"];?></h6></li>
+                    <li class="list-group-item"><h6 class="card-subtitle mb-2 text-muted"><b>Client Address: </b><?php echo $client[0]["ADDRESS"];?></h6></li>
                 </ul>
             </div>
                 <div class="card-footer"></div>
@@ -50,13 +50,13 @@
                             <?php
                                 $sr=1;
                                 foreach($documents as $document){
-                                    $path = $document["document"];
+                                    $path = $document["DOCUMENT"];
                                     $fileName = basename($path);
                                     $fileName = basename($path, ".*");
                                     echo "<tr>";
                                     echo "<th>".$sr."</th>";
                                     echo "<td>".$fileName."</td>";
-                                    echo "<td><a class=\"btn btn-primary\" href=\"".$document["document"]."\" download>Download</a></td>";
+                                    echo "<td><a class=\"btn btn-primary\" href=\"".$document["DOCUMENT"]."\" download>Download</a></td>";
                                     echo "</tr>";
                                     $sr++;
                                 }

@@ -3,7 +3,6 @@
     require_once '../controllers/lawyer_controller.php';
     require_once '../controllers/common_controller.php';
     $my_profile=getUserById($_COOKIE["id"]);
-    print_r($my_profile);
 ?>
 <center>
 <table>
@@ -42,7 +41,7 @@
                                         </tr>
                                         <tr>
                                             <td align="left" style="padding-bottom:10px;">Full Name: </td>
-                                            <td align="left" style="padding-bottom:10px;"><input class="form-control" type="text" name="fullname" id="fullname" placeholder="Full Name" value="<?php echo $my_profile[0]["fullname"]; ?>"><span id="err_fullname" style="color:red;"><?php echo $err_fullname;?></span></td>
+                                            <td align="left" style="padding-bottom:10px;"><input class="form-control" type="text" name="fullname" id="fullname" placeholder="Full Name" value="<?php echo $my_profile[0]["FULLNAME"]; ?>"><span id="err_fullname" style="color:red;"><?php echo $err_fullname;?></span></td>
                                         </tr>
                                         <tr>
                                             <td align="left" style="padding-bottom:10px;">Birthday: </td>
@@ -50,19 +49,19 @@
                                         </tr>
                                         <tr>
                                             <td align="left" style="padding-bottom:10px;">Address: </td>
-                                            <td align="left" style="padding-bottom:10px;"><input class="form-control" type="text" name="address" id="address" placeholder="Address" value="<?php echo $my_profile[0]["address"]; ?>"><span id="err_address" style="color:red;"><?php echo $err_address;?></span></td>
+                                            <td align="left" style="padding-bottom:10px;"><input class="form-control" type="text" name="address" id="address" placeholder="Address" value="<?php echo $my_profile[0]["ADDRESS"]; ?>"><span id="err_address" style="color:red;"><?php echo $err_address;?></span></td>
                                         </tr>
                                         <tr>
                                             <td align="left" style="padding-bottom:10px;">City: </td>
-                                            <td align="left" style="padding-bottom:10px;"><input class="form-control" type="text" name="city" id="city" placeholder="City" value="<?php echo $my_profile[0]["city"]; ?>"><span id="err_city" style="color:red;"><?php echo $err_city;?></span></td>
+                                            <td align="left" style="padding-bottom:10px;"><input class="form-control" type="text" name="city" id="city" placeholder="City" value="<?php echo $my_profile[0]["CITY"]; ?>"><span id="err_city" style="color:red;"><?php echo $err_city;?></span></td>
                                         </tr>
                                         <tr>
                                             <td align="left" style="padding-bottom:10px;">State: </td>
-                                            <td align="left" style="padding-bottom:10px;"><input class="form-control" type="text" name="state" id="state" placeholder="State" value="<?php echo $my_profile[0]["state"]; ?>"><span id="err_state" style="color:red;"><?php echo $err_state;?></span></td>
+                                            <td align="left" style="padding-bottom:10px;"><input class="form-control" type="text" name="state" id="state" placeholder="State" value="<?php echo $my_profile[0]["STATE"]; ?>"><span id="err_state" style="color:red;"><?php echo $err_state;?></span></td>
                                         </tr>
                                         <tr>
                                             <td align="left" style="padding-bottom:10px;">Zip/Postal: </td>
-                                            <td align="left" style="padding-bottom:10px;"><input class="form-control" type="text" name="zip" id="zip" placeholder="Postal/Zip-Code" value="<?php echo $my_profile[0]["zip"]; ?>"><span id="err_zip" style="color:red;"><?php echo $err_zip;?></span></td>
+                                            <td align="left" style="padding-bottom:10px;"><input class="form-control" type="text" name="zip" id="zip" placeholder="Postal/Zip-Code" value="<?php echo $my_profile[0]["ZIP"]; ?>"><span id="err_zip" style="color:red;"><?php echo $err_zip;?></span></td>
                                         </tr>
                                         <tr>
                                             <td colspan="2" align="center"><input class="btn btn-outline-success" type="submit" name="update_button" value="Update"></td>
@@ -78,6 +77,7 @@
     </tr>
 </table>
 </center>
+<script src="../scripts/lawyer_validation.js"></script>
 <?php
     include 'lawyer_footer.php';
 ?>

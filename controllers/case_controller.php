@@ -116,7 +116,7 @@
             $complainant_nid=htmlspecialchars($_POST["complainant_nid"]);
             $complainant=getComplainantByNid($complainant_nid);
             if(count($complainant)>0){
-                $complainant_id=$complainant[0]["id"];
+                $complainant_id=$complainant[0]["ID"];
             }
             else{
                 $err_complainant_nid="* NID Invalid.";
@@ -169,7 +169,7 @@
         if(!$hasError){
             $date_added=date("d/m/Y");
             $lawyer_id=$_COOKIE["id"];
-            updateCase($case_title, $case_description, $date_added, $hearing_date, $case_status, $document, $client_id, $complainant_id, $judge_id, $lawyer_id, $_GET["id"]);
+            updateCase($case_title, $case_description, $date_added, $hearing_date, $case_status, $document, $client_id, $complainant_id, $lawyer_id, $_GET["id"]);
         }
 
     }

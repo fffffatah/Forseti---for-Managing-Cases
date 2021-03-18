@@ -37,14 +37,14 @@
                             <?php
                                 $sr=1;
                                 foreach($clients as $client){
-                                    $my_client=getUserById($client["client_id"]);
+                                    $my_client=getUserById($client["CLIENT_ID"]);
                                     echo "<tr>";
                                     echo "<th>".$sr."</th>";
-                                    echo "<td>".$my_client[0]["fullname"]."</td>";
-                                    echo "<td>".$my_client[0]["phone"]."</td>";
-                                    echo "<td>".$my_client[0]["nid"]."</td>";
-                                    echo "<td><a class=\"btn btn-outline-primary\" href=\"lawyer_view_client.php?id=".$my_client[0]["id"]."\">View</a></td>";
-                                    echo "<td><a class=\"btn btn-outline-danger\" href=\"lawyer_remove_client.php?id=".$my_client[0]["id"]."\"target=\"_blank\" >Remove</a></td>";
+                                    echo "<td>".$my_client[0]["FULLNAME"]."</td>";
+                                    echo "<td>".$my_client[0]["PHONE"]."</td>";
+                                    echo "<td>".$my_client[0]["NID"]."</td>";
+                                    echo "<td><a class=\"btn btn-outline-primary\" href=\"lawyer_view_client.php?id=".$my_client[0]["ID"]."\">View</a></td>";
+                                    echo "<td><a class=\"btn btn-outline-danger\" href=\"lawyer_remove_client.php?id=".$my_client[0]["ID"]."\"target=\"_blank\" >Remove</a></td>";
                                     echo "</tr>";
                                     $sr++;
                                 }

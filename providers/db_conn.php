@@ -14,7 +14,6 @@
         oci_execute($stid);
         oci_free_statement($stid);
         oci_close($conn);
-        echo $query;
     }
 
     function doQuery($query){
@@ -32,7 +31,6 @@
         }
         oci_free_statement($stid);
         oci_close($conn);
-        echo $query;
         return $data;
     }
 ?>

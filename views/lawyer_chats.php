@@ -21,11 +21,11 @@
                             <?php
                                 $sr=1;
                                 foreach($clients as $client){
-                                    $client_name=getUserById($client["client_id"]);
+                                    $client_name=getUserById($client["CLIENT_ID"]);
                                     echo "<tr>";
                                     echo "<th>".$sr."</th>";
-                                    echo "<td>".$client_name[0]["fullname"]."</td>";
-                                    echo "<td><button class=\"btn btn-outline-primary\" name=\"chat_button\" id=\"chat_button\" onclick=\"chatRefresh(".$client_name[0]["id"].")\">Chat/Refresh</button></td>";
+                                    echo "<td>".$client_name[0]["FULLNAME"]."</td>";
+                                    echo "<td><button class=\"btn btn-outline-primary\" name=\"chat_button\" id=\"chat_button\" onclick=\"chatRefresh(".$client_name[0]["ID"].")\">Chat/Refresh</button></td>";
                                     echo "<tr>";
                                     $sr++;
                                  }

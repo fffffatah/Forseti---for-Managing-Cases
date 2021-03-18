@@ -23,7 +23,7 @@
         return doQuery($query);
     }
     function addDocument($document, $viewer_id, $uploader_id){
-        $query="INSERT INTO documents(document, viewer_id, uploader_id) VALUES ('$document', $viewer_id, $uploader_id)";
+        $query="INSERT INTO documents(id, document, viewer_id, uploader_id) VALUES (documents_id_seq.nextval, '$document', $viewer_id, $uploader_id)";
         doNoQuery($query);
     }
 ?>
