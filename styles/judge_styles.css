@@ -1,0 +1,70 @@
+.dropshadow-padding{
+  -webkit-box-shadow:3px 3px 5px 6px #ccc;
+  -moz-box-shadow:3px 3px 5px 6px #ccc;
+  box-shadow:3px 3px 5px 6px #ccc;
+  padding: 20px;
+}
+
+.dropshadow{
+  -webkit-box-shadow:3px 3px 5px 6px #ccc;
+  -moz-box-shadow:3px 3px 5px 6px #ccc;
+  box-shadow:3px 3px 5px 6px #ccc;
+}
+
+body{
+  font-family: sans-serif;
+}
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+header{
+  background: black;
+}
+header nav .left a{
+  color: #ffff;
+  text-decoration: none;
+  margin-right: 5rem;
+  text-transform:capitalize;
+}
+header nav .left a:hover{
+  color: #3DCFD3;
+  transition:all .3s;
+}
+.flex{
+  display: flex;
+}
+.item-center{
+  align-items: center;
+}
+.space-between{
+  justify-content: space-between;
+}
+header nav{
+  padding: .6rem 0;
+}
+header nav .logo{
+  padding-left: 1rem;
+  margin-right: 8rem ;
+}
+.right{
+    padding-right: 1rem;
+}
+.active-cyan-2 input.form-control[type=text]:focus:not([readonly]) {
+  border-bottom: 1px solid #4dd0e1;
+  box-shadow: 0 1px 0 0 #4dd0e1;
+}
+.active-cyan .fas, .active-cyan-2 .fas {
+  color: #4dd0e1;
+
+}
+
+.active-purple-2 input.form-control[type=text]:focus:not([readonly]) {
+  border-bottom: 1px solid #ce93d8;
+  box-shadow: 0 1px 0 0 #ce93d8;
+}
+.active-purple .fas, .active-purple-2 .fas {
+  color: #ce93d8;
+}
