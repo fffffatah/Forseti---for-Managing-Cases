@@ -3,7 +3,6 @@ function getEmailAddress(email){
 	xhttp.onreadystatechange=function()
 	{
     	if(xhttp.readyState ==4 && xhttp.status==200){
-            alert(xhttp.responseText);
             if(xhttp.responseText.length==13){
                 document.getElementById("valid_email").innerHTML="* Email Valid";
                 document.getElementById("invalid_email").innerHTML="";

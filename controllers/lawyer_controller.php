@@ -194,7 +194,7 @@
         if(!$hasError){
             setcookie($cookie_name, $cookie_value, time()+360, "/");
             $isHttps=(isset($_SERVER['HTTPS']))?"https://":"http://";
-            $confLink=$isHttps.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."?pp=".rawurlencode($pp)."&fullname=".rawurlencode($fullname)."&username=".rawurlencode($username)."&email=".rawurlencode($email)."&phone=".rawurlencode($phone)."&pass=".rawurlencode($pass)."&nid=".rawurlencode($nid)."&dob=".rawurlencode($dob)."&gender=".rawurlencode($gender)."&address=".rawurlencode($address)."&city=".rawurlencode($city)."&state=".$state."&zip=".rawurlencode($zip)."&unid=".rawurlencode($cookie_value)."&confirm=true";
+            $confLink=$isHttps.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."?pp=".rawurlencode($pp)."&fullname=".rawurlencode($fullname)."&username=".rawurlencode($username)."&email=".rawurlencode($email)."&phone=".rawurlencode($phone)."&pass=".rawurlencode($pass)."&nid=".rawurlencode($nid)."&dob=".rawurlencode($dob)."&gender=".rawurlencode($gender)."&address=".rawurlencode($address)."&city=".rawurlencode($city)."&state=".rawurlencode($state)."&zip=".rawurlencode($zip)."&unid=".rawurlencode($cookie_value)."&confirm=true";
             sendConfEmail($username, $email, $confLink);
             header("Location: confirmation_page.php");
         }

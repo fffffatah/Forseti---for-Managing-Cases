@@ -1,5 +1,7 @@
 <?php
     require_once '../providers/db_conn.php';
+    require_once '../providers/mail_sender.php';
+    require_once '../providers/generate_pdf.php';
     $hasError=false;
     $client_nid="";
     $err_client_nid="";
@@ -221,7 +223,7 @@
         if(!$hasError){
             setcookie($cookie_name, $cookie_value, time()+360, "/");
             $isHttps=(isset($_SERVER['HTTPS']))?"https://":"http://";
-            $confLink=$isHttps.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."?pp=".rawurlencode($pp)."&fullname=".rawurlencode($fullname)."&username=".rawurlencode($username)."&email=".rawurlencode($email)."&phone=".rawurlencode($phone)."&pass=".rawurlencode($pass)."&nid=".rawurlencode($nid)."&dob=".rawurlencode($dob)."&gender=".rawurlencode($gender)."&address=".rawurlencode($address)."&city=".rawurlencode($city)."&state=".$state."&zip=".rawurlencode($zip)."&unid=".rawurlencode($cookie_value)."&confirm=true";
+            $confLink=$isHttps.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."?pp=".rawurlencode($pp)."&fullname=".rawurlencode($fullname)."&username=".rawurlencode($username)."&email=".rawurlencode($email)."&phone=".rawurlencode($phone)."&pass=".rawurlencode($pass)."&nid=".rawurlencode($nid)."&dob=".rawurlencode($dob)."&gender=".rawurlencode($gender)."&address=".rawurlencode($address)."&city=".rawurlencode($city)."&state=".rawurlencode($state)."&zip=".rawurlencode($zip)."&unid=".rawurlencode($cookie_value)."&confirm=true";
             sendConfEmail($username, $email, $confLink);
             header("Location: confirmation_page.php");
         }
@@ -269,5 +271,45 @@
     function insertClient($pp, $fullname, $username, $email, $phone, $pass, $nid, $dob, $gender, $address, $city, $state, $zip){
         $query="INSERT INTO users(ID, PP, FULLNAME, USERNAME, EMAIL, PHONE, PASS, NID, DOB, GENDER, ADDRESS, CITY, STATE, ZIP, TYPE) VALUES(user_id_seq.nextval,'$pp','$fullname','$username','$email','$phone','$pass','$nid','$dob','$gender','$address','$city','$state','$zip','client')";
         doNoQuery($query);
+    }
+    //AJAX LIVE CHECK
+    function getLawyerByEmail($email){
+        global $hasError, $err_email;
+        $query="SELECT * FROM users WHERE email='$email'";
+        $result=doQuery($query);
+        if(count($result)>0){
+            $err_email="* Email Taken";
+            $hasError=true;
+        }
+        getLawyerByUsername(htmlspecialchars($_POST["username"]));
+    }
+    function getLawyerByUsername($username){
+        global $hasError, $err_username;
+        $query="SELECT * FROM users WHERE username='$username'";
+        $result=doQuery($query);
+        if(count($result)>0){
+            $err_username="* Username Taken";
+            $hasError=true;
+        }
+        getLawyerByNid(htmlspecialchars($_POST["nid"]));
+    }
+    function getLawyerByNid($nid){
+        global $hasError, $err_nid;
+        $query="SELECT * FROM users WHERE nid='$nid'";
+        $result=doQuery($query);
+        if(count($result)>0){
+            $err_nid="* NID Taken";
+            $hasError=true;
+        }
+        getLawyerByPhone($_POST["phone"]);
+    }
+    function getLawyerByPhone($phone){
+        global $hasError, $err_phone;
+        $query="SELECT * FROM users WHERE phone='$phone'";
+        $result=doQuery($query);
+        if(count($result)>0){
+            $err_phone="* Phone Taken";
+            $hasError=true;
+        }
     }
 ?>

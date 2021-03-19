@@ -1,5 +1,5 @@
 <?php
-    require_once '../controllers/lawyer_controller.php';
+    require_once '../controllers/client_controller.php';
 ?>
 
 <html>

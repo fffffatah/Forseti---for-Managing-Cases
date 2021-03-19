@@ -1,11 +1,7 @@
 <?php
-    $uname=getenv('MYSQLCONNSTR_dbUser');
-    $server=getenv('MYSQLCONNSTR_dbHost');
-    $pass=getenv('MYSQLCONNSTR_dbPass');
-
     function doNoQuery($query){
         global $uname, $server, $pass;
-        $conn=oci_connect($uname, $pass, $server);
+        $conn=oci_connect("forseti", "forseti", "localhost:1521/XE");
         if (!$conn) {
             $e = oci_error();
             trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
@@ -18,7 +14,7 @@
 
     function doQuery($query){
         global $uname, $server, $pass;
-        $conn=oci_connect($uname, $pass, $server);
+        $conn=oci_connect("forseti", "forseti", "localhost:1521/XE");
         if (!$conn) {
             $e = oci_error();
             trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);

@@ -22,7 +22,7 @@
     function sendConfEmail($username, $address, $confLink){
         $email=new \SendGrid\Mail\Mail();
         $email->setFrom("no-reply@forseti.com", "Forseti - Confirmation");
-        $email->setSubject("Your Justice Confirmation Email");
+        $email->setSubject("Your Forseti Confirmation Email");
         $email->addTo($address, $username);
         $email->addContent("text/plain", "Confirmation Email for Account Creation: ");
         
