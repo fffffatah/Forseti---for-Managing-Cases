@@ -228,6 +228,71 @@
             header("Location: confirmation_page.php");
         }
     }
+    //UPDATE PROFILE VALIDATIONS
+    if(isset($_POST["update_button"])){
+        //PROFILE PIC VALIDATION
+        if(empty($_FILES["pp"]["name"])){
+            $err_pp="* Profile Picture Required.";
+            $hasError=true;
+        }
+        else{
+            $fileType=strtolower(pathinfo(basename($_FILES["pp"]["name"]),PATHINFO_EXTENSION));
+            $pp="../storage/images/".uniqid().".$fileType";
+            move_uploaded_file($_FILES["pp"]["tmp_name"],$pp);
+        }
+        //FULLNAME VALIDATION
+        if(empty($_POST["fullname"])){
+            $err_fullname="* Full Name Required.";
+            $hasError=true;
+        }
+        else{
+            $fullname=htmlspecialchars($_POST["fullname"]);
+        }
+        //DATE OF BIRTH VALIDATION
+        if(!isset($_POST["dob"])){
+            $err_dob="* Birthday Required.";
+            $hasError=true;
+        }
+        else{
+            $dob=$_POST["dob"];
+        }
+        //ADDRESS VALIDATION
+        if(empty($_POST["address"])){
+            $err_address="* Address Required.";
+            $hasError=true;
+        }
+        else{
+            $address=htmlspecialchars($_POST["address"]);
+        }
+        //CITY VALIDATION
+        if(empty($_POST["city"])){
+            $err_city="* City Required.";
+            $hasError=true;
+        }
+        else{
+            $city=htmlspecialchars($_POST["city"]);
+        }
+        //STATE VALIDATION
+        if(empty($_POST["state"])){
+            $err_state="* State Required.";
+            $hasError=true;
+        }
+        else{
+            $state=htmlspecialchars($_POST["state"]);
+        }
+        //ZIP VALIDATION
+        if(empty($_POST["zip"])){
+            $err_zip="* Zip/Postal Code Required.";
+            $hasError=true;
+        }
+        else{
+            $zip=htmlspecialchars($_POST["zip"]);
+        }
+
+        if(!$hasError){
+            updateClient($pp, $fullname, $dob, $address, $city, $state, $zip, $_COOKIE["id"]);
+        }
+    }
     if(isset($_GET["confirm"])){
         if(isset($_COOKIE[$cookie_name])){
             if(strcmp($_COOKIE[$cookie_name],$_GET["unid"])==0){
@@ -247,6 +312,11 @@
     //CLIENT DATA ACCESS
     function addClient($client_id, $lawyer_id){
         $query="INSERT INTO clients(id, client_id, lawyer_id) VALUES (clients_id_seq.nextval,$client_id,$lawyer_id)";
+        doNoQuery($query);
+    }
+
+    function updateClient($pp, $fullname, $dob, $address, $city, $state, $zip, $id){
+        $query="UPDATE users SET pp='$pp',fullname='$fullname',dob='$dob',address='$address',city='$city',state='$state',zip='$zip' WHERE id=".$id;
         doNoQuery($query);
     }
 

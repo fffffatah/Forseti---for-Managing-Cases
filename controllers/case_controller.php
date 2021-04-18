@@ -192,7 +192,7 @@
         return doQuery($query);
     }
     function getCasesForClient($id){
-        $query="SELECT * FROM cases WHERE client_id=".$id;
+        $query="SELECT * FROM cases WHERE client_id=".$id."OR complainant_id=".$id;
         return doQuery($query);
     }
     function deleteCase($id){

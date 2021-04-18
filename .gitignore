@@ -1,0 +1,4 @@
+storage/docs/*
+storage/images/*
+!storage/docs/.temp
+!storage/images/.temp
