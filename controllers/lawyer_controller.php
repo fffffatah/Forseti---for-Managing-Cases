@@ -302,6 +302,10 @@
         $query="SELECT * FROM users";
         return doQuery($query);
     }
+    function getLawyersForClient($id){
+        $query="SELECT LAWYER_ID FROM cases WHERE client_id=".$id."OR complainant_id=".$id;
+        return doQuery($query);
+    }
     function getLawyerByEmail($email){
         global $hasError, $err_email;
         $query="SELECT * FROM users WHERE email='$email'";
