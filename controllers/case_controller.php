@@ -203,4 +203,12 @@
         $query="SELECT * FROM users WHERE nid='$complainant_nid' AND type='client'";
         return doQuery($query);
     }
+    function getFiledCases($client_id){
+        $query="SELECT * FROM cases WHERE complainant_id=".$client_id;
+        return doQuery($query);
+    }
+    function getFiledAgainstMeCases($client_id){
+        $query="SELECT * FROM cases WHERE client_id=".$client_id;
+        return doQuery($query);
+    }
 ?>
