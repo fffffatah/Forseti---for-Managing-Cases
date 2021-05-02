@@ -84,6 +84,7 @@
         </td>
     </table>
 </center>
+<script src="../scripts/search_lawyer_ajax.js"></script>
 <?php
     include 'client_footer.php';
 ?>

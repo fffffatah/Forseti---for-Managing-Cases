@@ -84,4 +84,8 @@
         $query="SELECT * FROM users WHERE id=$id";
         return doQuery($query);
     }
+    function getMeetingsForAttandee($id){
+        $query="SELECT * FROM meetings WHERE attandee_id=$id";
+        return doQuery($query);
+    }
 ?>
