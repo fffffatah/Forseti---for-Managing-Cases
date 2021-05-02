@@ -4,6 +4,7 @@
     require_once '../controllers/common_controller.php';
     require_once '../controllers/client_controller.php';
     require_once '../controllers/document_controller.php';
+    require_once '../controllers/review_controller.php';
     $lawyer=getUserById($_GET["id"]);
     $cases=getCasesForLaywer($_GET["id"]);
     $documents=getDocumentsForClient($_COOKIE["id"], $_GET["id"]);
@@ -35,13 +36,13 @@
                 <div class="card-footer">
                     <form action="" method="post">
                         Rating: 
-                        <input type="radio" name="rating" id="rating" value="5"> 5
+                        <input type="radio" name="rating" id="rating" value="5" checked="checked"> 5
                         <input type="radio" name="rating" id="rating" value="4"> 4
                         <input type="radio" name="rating" id="rating" value="3"> 3
                         <input type="radio" name="rating" id="rating" value="2"> 2
                         <input type="radio" name="rating" id="rating" value="1"> 1
                         <div style="padding-top:20px"></div>
-                        <textarea class="form-control" name="review" id="review" placeholder="Write Your Review Here!" rows="4" cols="50"></textarea>
+                        <textarea class="form-control" name="review" id="review" placeholder="Write Your Review Here!" rows="4" cols="50"></textarea><span id="err_review" style="color:red;"><?php echo $err_review;?></span>
                         <div style="padding-top:20px"></div>
                         <center><input class="btn btn-outline-success" type="submit" name="submit_review" value="Submit"></center>
                     </form>
