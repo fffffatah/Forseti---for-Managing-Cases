@@ -1,7 +1,6 @@
 <?php
     function doNoQuery($query){
-        global $uname, $server, $pass;
-        $conn=oci_connect("forseti", "forseti", "localhost:1521/XE");
+        $conn=oci_connect(getenv("ODB_USER",true), getenv("ODB_PASS",true), getenv("ODB_STRING",true));
         if (!$conn) {
             $e = oci_error();
             trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
@@ -13,8 +12,7 @@
     }
 
     function doQuery($query){
-        global $uname, $server, $pass;
-        $conn=oci_connect("forseti", "forseti", "localhost:1521/XE");
+        $conn=oci_connect(getenv("ODB_USER",true), getenv("ODB_PASS",true), getenv("ODB_STRING",true));
         if (!$conn) {
             $e = oci_error();
             trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);

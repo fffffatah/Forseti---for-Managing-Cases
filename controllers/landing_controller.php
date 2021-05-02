@@ -47,8 +47,11 @@
                 if(strcmp($user_id[0]["TYPE"],"lawyer")==0){
                     header("Location: lawyer_dashboard.php");
                 }
-                else{
+                elseif(strcmp($user_id[0]["TYPE"],"client")==0){
                     header("Location: client_dashboard.php");
+                }
+                else{
+                    header("Location: admin_dashboard.php");
                 }
 			}
         }
