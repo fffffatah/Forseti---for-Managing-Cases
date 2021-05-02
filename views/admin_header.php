@@ -20,7 +20,7 @@
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li class="nav-item"><a class="nav-link" href="admin_dashboard.php">Dashboard</a></li>
                         <li class="nav-item"><a class="nav-link" href="admin_clients.php">Clients</a></li>
-                        <li class="nav-item"><a class="nav-link" href="amdin_lawyers.php">Lawyers</a></li>
+                        <li class="nav-item"><a class="nav-link" href="admin_lawyers.php">Lawyers</a></li>
                     </ul>
                 <div class="navbar-nav ml-auto">
 				    <li class="nav-item"><a class="btn btn-outline-danger" onclick="onLogOutDeleteSessionCookie()" href="landing.php" style="color:white;"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
