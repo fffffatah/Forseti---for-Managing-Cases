@@ -22,6 +22,10 @@
         $query="SELECT * FROM documents WHERE viewer_id=$viewer_id AND uploader_id=$uploader_id";
         return doQuery($query);
     }
+    function getDocumentsForClient($viewer_id, $uploader_id){
+        $query="SELECT * FROM documents WHERE viewer_id=$viewer_id AND uploader_id=$uploader_id";
+        return doQuery($query);
+    }
     function addDocument($document, $viewer_id, $uploader_id){
         $query="INSERT INTO documents(id, document, viewer_id, uploader_id) VALUES (documents_id_seq.nextval, '$document', $viewer_id, $uploader_id)";
         doNoQuery($query);
