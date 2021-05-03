@@ -1,4 +1,13 @@
 <?php
+    function makePlsqlStatement($query){
+        $conn=oci_connect(getenv("ODB_USER",true), getenv("ODB_PASS",true), getenv("ODB_STRING",true));
+        if (!$conn) {
+            $e = oci_error();
+            trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+        }       
+        return oci_parse($conn, $query);
+    }
+
     function doNoQuery($query){
         $conn=oci_connect(getenv("ODB_USER",true), getenv("ODB_PASS",true), getenv("ODB_STRING",true));
         if (!$conn) {

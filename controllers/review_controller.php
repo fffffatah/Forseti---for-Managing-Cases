@@ -18,7 +18,16 @@
         }
     }
     function addReview($review, $rating, $reviewer_id, $reviewee_id){
-        //todo with plsql
+        $query="Begin AddReview(:review, :rating, :reviewerid, :revieweeid); End;";
+        $stmt=makePlsqlStatement($query);
+        oci_bind_by_name($stmt, ':review', $review, 500);
+        oci_bind_by_name($stmt, ':rating', $rating, 500);
+        oci_bind_by_name($stmt, ':reviewerid', $reviewer_id, 500);
+        oci_bind_by_name($stmt, ':revieweeid', $reviewee_id, 500);
+        if (false===@oci_execute($stmt)) {
+            echo "<script>alert('Only One Review Can be Submitted Per Lawyer!')</script>";
+        }
+        oci_free_statement($stmt);
     }
     function getReviewsForReviewee($reviewee_id){
         $query="SELECT * FROM reviews WHERE reviewee_id=$reviewee_id";
