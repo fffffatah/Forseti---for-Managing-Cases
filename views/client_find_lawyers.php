@@ -36,7 +36,6 @@
             </div>
         </td>
         <td align="center" style="padding-top:100px;">
-        <form class="form-inline my-2 my-lg-0" method="POST">
         <div class="card border-info mb3" style="height:600px;width:900px;">
                 <div class="card-header">Search Lawyers</div>
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -45,8 +44,7 @@
                 <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown">
                     State: <select name="search_lawyer_by_state" id="search_lawyer_by_state">
-                        <option value="" selected disabled>State</option>
-                        <option value="Dhaka">Dhaka</option>
+                        <option value="Dhaka" selected>Dhaka</option>
                         <option value="Chittagong">Chittagong</option>
                         <option value="Rajshahi">Rajshahi</option>
                         <option value="Barishal">Barishal</option>
@@ -67,20 +65,19 @@
                     </select>
                 </li>
                 </ul>
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search_box" name="search_box">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="searchLawyer()">Search</button>
                 </div>
                 </nav>
                     <div class="card-body scroll-box">
                     <div class="table-responsive">
                         <table class="table" table-borderless id="search_lawyers_for_client">
-
+                            
                         </table>
                     </div>
                     </div>
                     <div class="card-footer"></div>
             </div>
-            </form>
         </td>
     </table>
 </center>
