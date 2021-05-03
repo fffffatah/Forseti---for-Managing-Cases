@@ -48,7 +48,7 @@
             $payAm=htmlspecialchars($_POST["payAm"]);
         }
         if(!$hasError){
-            doPayment($payAm);
+            doPayment($payAm, date("m-d-Y"), $_GET["id"]);
         }
     }
     //PAYMENT DATA ACCESS
@@ -72,7 +72,15 @@
         $query="SELECT * FROM payments WHERE id=$id";
         return doQuery($query);
     }
-    function doPayment($paid){
-        //todo with trigger
+    function doPayment($payam, $paydate, $pid){
+        $query="Begin ClientPayment(:payam, :paydate, :pid); End;";
+        $stmt=makePlsqlStatement($query);
+        oci_bind_by_name($stmt, ':payam', $payam, 500);
+        oci_bind_by_name($stmt, ':paydate', $paydate, 500);
+        oci_bind_by_name($stmt, ':pid', $pid, 500);
+        if (false===@oci_execute($stmt)) {
+            echo "<script>alert('Please Pay Exact or Less Amount than Due!')</script>";
+        }
+        oci_free_statement($stmt);
     }
 ?>
