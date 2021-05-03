@@ -25,6 +25,7 @@
                         <li class="nav-item"><a class="nav-link" href="lawyer_reports.php">Reports</a></li>
                         <li class="nav-item"><a class="nav-link" href="lawyer_payments.php">Payments</a></li>
                         <li class="nav-item"><a class="nav-link" href="lawyer_chats.php">Chats</a></li>
+                        <li class="nav-item"><a class="nav-link" href="lawyer_reviews.php">Reviews</a></li>
                     </ul>
                 <div class="navbar-nav ml-auto">
                     <li class="nav-item"><a class="btn btn-outline-info" href="lawyer_profile.php" style="color:white;"><i class="fas fa-address-card"></i> Profile</a></li>

@@ -8,6 +8,8 @@
     $err_payer_id="";
     $err_due="";
     $err_due_date="";
+    $payAm="";
+    $err_payAm="";
     if(isset($_POST["add_payment_button"])){
         //DUE AMOUNT VALIDATION
         if(empty($_POST["due"])){
@@ -37,9 +39,25 @@
             addPayment($due, "0", "0", $due_date, "0", $payer_id, $_COOKIE["id"]);
         }
     }
+    if(isset($_POST["pay_button"])){
+        if(empty($_POST["payAm"])){
+            $err_payAm="* Payment Amount Required.";
+            $hasError=true;
+        }
+        else{
+            $payAm=htmlspecialchars($_POST["payAm"]);
+        }
+        if(!$hasError){
+            doPayment($payAm);
+        }
+    }
     //PAYMENT DATA ACCESS
     function getPaymentsForReceiver($receiver_id){
         $query="SELECT * FROM payments WHERE receiver_id=$receiver_id";
+        return doQuery($query);
+    }
+    function getPaymentsForPayer($payer_id){
+        $query="SELECT * FROM payments WHERE payer_id=$payer_id";
         return doQuery($query);
     }
     function addPayment($due, $paid, $balance, $due_date, $payment_date, $payer_id, $receiver_id){
@@ -53,5 +71,8 @@
     function getPayment($id){
         $query="SELECT * FROM payments WHERE id=$id";
         return doQuery($query);
+    }
+    function doPayment($paid){
+        //todo with trigger
     }
 ?>
