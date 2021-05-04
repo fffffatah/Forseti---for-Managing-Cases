@@ -56,8 +56,7 @@
                 </li>
                 <li class="nav-item dropdown" style="padding-left:20px">
                     Rating: <select name="search_lawyer_by_rating" id="search_lawyer_by_rating">
-                        <option value="All" selected>All</option>
-                        <option value="5">5</option>
+                        <option value="5" selected>5</option>
                         <option value="4">4</option>
                         <option value="3">3</option>
                         <option value="2">2</option>

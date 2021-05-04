@@ -8,6 +8,15 @@
         return oci_parse($conn, $query);
     }
 
+    function onlyConn(){
+        $conn=oci_connect(getenv("ODB_USER",true), getenv("ODB_PASS",true), getenv("ODB_STRING",true));
+        if (!$conn) {
+            $e = oci_error();
+            trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+        }
+        return $conn;
+    }
+
     function doNoQuery($query){
         $conn=oci_connect(getenv("ODB_USER",true), getenv("ODB_PASS",true), getenv("ODB_STRING",true));
         if (!$conn) {
