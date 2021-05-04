@@ -32,4 +32,8 @@
         $query="SELECT * FROM users WHERE id=".$id;
         return doQuery($query);
     }
+    function getAllUser(){
+        $query="SELECT * FROM users";
+        return doQuery($query);
+    }
 ?>
