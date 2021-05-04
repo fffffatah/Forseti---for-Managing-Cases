@@ -21,6 +21,8 @@
                         <li class="nav-item"><a class="nav-link" href="admin_dashboard.php">Dashboard</a></li>
                         <li class="nav-item"><a class="nav-link" href="admin_clients.php">Clients</a></li>
                         <li class="nav-item"><a class="nav-link" href="admin_lawyers.php">Lawyers</a></li>
+                        <li class="nav-item"><a class="nav-link" href="admin_add_client.php">Add Clients</a></li>
+                        <li class="nav-item"><a class="nav-link" href="admin_add_lawyer.php">Add Lawyers</a></li>
                     </ul>
                 <div class="navbar-nav ml-auto">
 				    <li class="nav-item"><a class="btn btn-outline-danger" onclick="onLogOutDeleteSessionCookie()" href="landing.php" style="color:white;"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
