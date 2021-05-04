@@ -55,6 +55,16 @@ create table USERS
 )
 /
 
+create trigger RESTRICTEDPROFILEUPDATE
+    before update
+    on USERS
+begin
+    if (to_char(sysdate, 'DY') in ('FRI', 'SAT', 'SUN')) then
+        raise_application_error(-20222, 'Profile Cannot Be Updated on Friday, Saturday or Sunday!');
+    end if;
+end;
+/
+
 create table CASES
 (
     ID               NUMBER not null
@@ -80,6 +90,14 @@ create table CASES
 )
 /
 
+create trigger RESTRICTEDCASE
+    before insert or update
+    on CASES
+begin
+    raise_application_error(-20223, 'All Cases are Locked By Admin!');
+end;
+/
+
 create table CLIENTS
 (
     ID        NUMBER not null
@@ -91,6 +109,14 @@ create table CLIENTS
         constraint CLIENTS_USERS_ID_FK_2
             references USERS
 )
+/
+
+create trigger RESTRICTEDCLIENT
+    before insert or update
+    on CLIENTS
+begin
+    raise_application_error(-20225, 'Client Hiring is Locked By Admin!');
+end;
 /
 
 create table DOCUMENTS
@@ -143,6 +169,14 @@ create table PAYMENTS
 )
 /
 
+create trigger RESTRICTEDPAYMENT
+    before insert or update
+    on PAYMENTS
+begin
+    raise_application_error(-20223, 'All Payments are Locked By Admin!');
+end;
+/
+
 create table REPORTS
 (
     ID             NUMBER not null
@@ -184,6 +218,113 @@ create table CHATS
         constraint CHATS_USERS_ID_FK_2
             references USERS
 )
+/
+
+create function IsReviewDone(ReviewerId REVIEWS.REVIEWER_ID%type, RevieweeId REVIEWS.REVIEWEE_ID%type)
+    return boolean
+    is
+    CountReview number(10);
+Begin
+    SELECT COUNT(*) INTO CountReview FROM REVIEWS WHERE REVIEWER_ID = ReviewerId AND REVIEWEE_ID = RevieweeId;
+    IF CountReview > 0 THEN
+        RETURN TRUE;
+    ELSE
+        RETURN FALSE;
+    END IF;
+end;
+/
+
+create procedure AddReview(Review in REVIEWS.REVIEW%type, Rating in REVIEWS.RATING%type,
+                           ReviewerId in REVIEWS.REVIEWER_ID%type, RevieweeId in REVIEWS.REVIEWEE_ID%type)
+    is
+Begin
+    IF IsReviewDone(ReviewerId, RevieweeId) THEN
+        raise_application_error(-20201, 'Review Already Done!');
+    ELSE
+        INSERT INTO REVIEWS(ID, REVIEW, RATING, REVIEWER_ID, REVIEWEE_ID)
+        VALUES (REVIEWS_ID_SEQ.NEXTVAL, Review, Rating, ReviewerId, RevieweeId);
+    END IF;
+end;
+/
+
+create PROCEDURE ClientPayment(PayAm IN PAYMENTS.PAID%type, PayDate IN PAYMENTS.PAYMENT_DATE%type,
+                               PId IN PAYMENTS.ID%type)
+    IS
+    BALANCELOC PAYMENTS.BALANCE%type;
+    DUELOC     PAYMENTS.DUE%type;
+BEGIN
+    SELECT DUE INTO DUELOC FROM PAYMENTS WHERE ID = PId;
+    BALANCELOC := DUELOC - PayAm;
+    IF (BALANCELOC < 0) THEN
+        raise_application_error(-20202, 'Please Pay Exact or Less Amount than Due!');
+    ELSE
+        UPDATE PAYMENTS SET DUE=BALANCELOC, PAID=PAID + PayAm, BALANCE=BALANCELOC, PAYMENT_DATE=PayDate WHERE ID = PId;
+    END IF;
+END;
+/
+
+create PROCEDURE DeleteUser(UserId IN USERS.ID%type)
+    IS
+BEGIN
+    DELETE FROM CASES WHERE CLIENT_ID = UserId OR COMPLAINANT_ID = UserId OR LAWYER_ID = UserId;
+    DELETE FROM CHATS WHERE RECEIVER_ID = UserId OR SENDER_ID = UserId;
+    DELETE FROM CLIENTS WHERE LAWYER_ID = UserId OR CLIENT_ID = UserId;
+    DELETE FROM DOCUMENTS WHERE UPLOADER_ID = UserId OR VIEWER_ID = UserId;
+    DELETE FROM MEETINGS WHERE ATTANDEE_ID = UserId OR ORGANIZER_ID = UserId;
+    DELETE FROM PAYMENTS WHERE RECEIVER_ID = UserId OR PAYER_ID = UserId;
+    DELETE FROM REPORTS WHERE GENERATOR_ID = UserId;
+    DELETE FROM REVIEWS WHERE REVIEWEE_ID = UserId OR REVIEWER_ID = UserId;
+    DELETE FROM USERS WHERE ID = UserId;
+END;
+/
+
+create PROCEDURE SearchLawyer(stateDiv IN USERS.STATE%type, rate IN REVIEWS.RATING%type, keyW varchar,
+                              REFCUR OUT SYS_REFCURSOR)
+    IS
+BEGIN
+    OPEN REFCUR FOR SELECT *
+                    FROM USERS
+                    WHERE USERS.ID IN (SELECT U.ID
+                                       FROM USERS U,
+                                            REVIEWS R
+                                       WHERE U.ID = R.REVIEWEE_ID
+                                         AND R.RATING <= rate
+                                       GROUP BY U.ID
+                                       HAVING AVG(R.RATING) IN (SELECT AVG(R.RATING)
+                                                                FROM USERS U,
+                                                                     REVIEWS R
+                                                                WHERE U.ID = R.REVIEWEE_ID
+                                                                  AND R.RATING <= rate
+                                                                GROUP BY U.ID))
+                      AND STATE = stateDiv
+                      AND FULLNAME LIKE keyW || '%';
+END;
+/
+
+create PROCEDURE SearchClient(stateDiv IN USERS.STATE%type, balance IN PAYMENTS.BALANCE%type, keyW varchar,
+                              REFCUR OUT SYS_REFCURSOR)
+    IS
+BEGIN
+    IF balance > 0 THEN
+        OPEN REFCUR FOR SELECT DISTINCT U.*
+                        FROM USERS U,
+                             PAYMENTS P
+                        WHERE U.ID = P.PAYER_ID
+                          AND U.TYPE = 'client'
+                          AND U.STATE = stateDiv
+                          AND P.BALANCE > 0
+                          AND U.FULLNAME LIKE keyW || '%';
+    ELSE
+        OPEN REFCUR FOR SELECT DISTINCT U.*
+                        FROM USERS U,
+                             PAYMENTS P
+                        WHERE U.ID = P.PAYER_ID
+                          AND U.TYPE = 'client'
+                          AND U.STATE = stateDiv
+                          AND P.BALANCE = 0
+                          AND U.FULLNAME LIKE keyW || '%';
+    END IF;
+END;
 /
 
 
